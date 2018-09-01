@@ -1,0 +1,34 @@
+@font-face {
+    font-family: CFOctobre;
+    src: url("../fonts/CFOctobre-Regular.ttf") format("truetype");
+}
+
+.font-CFOctobre {
+    font-family: 'CFOctobre', Arial, serif;
+}
+
+h1 {
+    text-align: center;
+    font-family: CFOctobre, Arial, serif;
+   font-size: 5vw;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td {
+    font-family: CFOctobre, Arial, serif;
+    font-size: 1.2vw;
+    text-align: center;
+    border-bottom: 1px solid #dddddd;
+    word-wrap:break-word;
+}
+
+th{
+    font-family: CFOctobre, Arial, serif;
+    font-size: 1.5vw;
+    text-align: center;
+    border-bottom: 1px solid #dddddd;
+}

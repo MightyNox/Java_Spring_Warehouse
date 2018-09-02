@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/style/panel-style.css">
+    <meta charset="UTF-8">
+    <title>Add Goods</title>
+</head>
+<body>
+<h2>
+    Add Goods<br><br><br>
+</h2>
+
+<form method="POST" action="/panel/statement" enctype="multipart/form-data">
+<table>
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Quantity
+        </th>
+        <th>
+            Price
+        </th>
+    </tr>
+    <tr>
+
+        <td>
+            <input type="text" name="name" minlength="5" required><br>
+        </td>
+        <td>
+            <input type="number" name="quantity" min="0" value="0" required><br>
+        </td>
+        <td>
+            <input type="number" name="price" min="0.01" value="0.01" step="0.01" required><br>
+    </tr>
+    <tr>
+        <th>
+            Category
+        </th>
+        <th>
+            Producer
+        </th>
+        <th>
+            Description
+        </th>
+    </tr>
+    <tr>
+        <td>
+            <input type="text" name="category" required><br>
+        </td>
+        <td>
+            <input type="text" name="producer" required><br>
+        </td>
+        <td>
+            <input type="text" name="description" minlength="10" maxlength="100"><br>
+        </td>
+    </tr>
+</table>
+
+    <br><br><br>
+    <div style="text-align: center;">
+        <a href="/panel">
+            <button>
+                Back
+            </button>
+        </a>
+        <input type="reset" value="Reset">
+        <input type="submit" value="Add Item">
+    </div>
+</form>
+</body>
+</html>

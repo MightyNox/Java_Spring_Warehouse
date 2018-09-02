@@ -13,6 +13,13 @@ public class Category {
     @NotNull
     private String categoryName;
 
+    public Category() {
+    }
+
+    public Category(@NotNull String categoryName) {
+        this.categoryName = categoryName;
+    }
+
     public long getCategoryId() {
         return categoryId;
     }

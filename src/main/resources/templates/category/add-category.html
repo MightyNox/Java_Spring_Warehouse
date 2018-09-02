@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/style/panel-style.css">
+    <meta charset="UTF-8">
+    <title>Add Category</title>
+</head>
+<body>
+<h2>
+    Add Category<br><br><br>
+</h2>
+
+<form method="POST" action="/panel/add-category/statement" enctype="multipart/form-data">
+    <table>
+        <tr>
+            <th>
+                Name
+            </th>
+        </tr>
+        <tr>
+            <td>
+                <input type="text" name="name" minlength="3" required><br>
+            </td>
+        </tr>
+    </table>
+
+    <br><br><br>
+    <div style="text-align: center;">
+        <a href="/panel">
+            <button>
+                Back
+            </button>
+        </a>
+        <input type="reset" value="Reset">
+        <input type="submit" value="Add Item">
+    </div>
+</form>
+</body>
+</html>

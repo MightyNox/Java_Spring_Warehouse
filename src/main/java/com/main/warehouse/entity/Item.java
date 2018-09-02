@@ -1,5 +1,7 @@
 package com.main.warehouse.entity;
 
+import org.hibernate.validator.constraints.UniqueElements;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
@@ -8,7 +10,7 @@ import javax.validation.constraints.NotNull;
 public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long itemID;
+    private long itemId;
 
     @NotNull
     private String itemName;
@@ -19,14 +21,30 @@ public class Item {
     @NotNull
     private double itemPrice;
 
+
+    @ManyToOne
+    private Category itemCategory;
+
+    @ManyToOne
+    private Country itemCountry;
+
     private String itemDescription;
 
+    public Item(@NotNull String itemName, @NotNull long itemQuantity, @NotNull double itemPrice, Category itemCategory, Country itemCountry, String itemDescription) {
+        this.itemName = itemName;
+        this.itemQuantity = itemQuantity;
+        this.itemPrice = itemPrice;
+        this.itemCategory = itemCategory;
+        this.itemCountry = itemCountry;
+        this.itemDescription = itemDescription;
+    }
+
     public long getItemID() {
-        return itemID;
+        return itemId;
     }
 
     public void setItemID(long itemID) {
-        this.itemID = itemID;
+        this.itemId = itemID;
     }
 
     public String getItemName() {

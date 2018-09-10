@@ -61,6 +61,9 @@ public class MainController {
         try {
             if (form.getCategory().getCategoryId() == -1)
                 form.setCategory(null);
+            if (form.getCountry().getCountryId() == -1)
+                form.setCountry(null);
+
             itemDao.save(new Item(name, quantity, price, form.getCategory(), form.getCountry(), description));
         }
         catch (Exception e)

@@ -8,16 +8,35 @@ import javax.validation.constraints.NotNull;
 public class Country {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long countryId;
+    private Long countryId;
 
     @NotNull
     private String countryName;
 
-    public long getCountryId() {
+    @NotNull
+    private String countryCode;
+
+    public Country() {
+    }
+
+    public Country(@NotNull String countryName, @NotNull String countryCode) {
+        this.countryName = countryName;
+        this.countryCode = countryCode;
+    }
+
+    public String getCountryCode() {
+        return countryCode;
+    }
+
+    public void setCountryCode(String countryCode) {
+        this.countryCode = countryCode;
+    }
+
+    public Long getCountryId() {
         return countryId;
     }
 
-    public void setCountryId(long countryId) {
+    public void setCountryId(Long countryId) {
         this.countryId = countryId;
     }
 

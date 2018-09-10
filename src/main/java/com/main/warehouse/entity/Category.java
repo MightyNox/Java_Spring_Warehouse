@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long categoryId;
+    private Long categoryId;
 
     @NotNull
     private String categoryName;
@@ -20,11 +20,11 @@ public class Category {
         this.categoryName = categoryName;
     }
 
-    public long getCategoryId() {
+    public Long getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(long categoryId) {
+    public void setCategoryId(Long categoryId) {
         this.categoryId = categoryId;
     }
 

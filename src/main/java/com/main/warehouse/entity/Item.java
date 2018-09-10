@@ -10,17 +10,16 @@ import javax.validation.constraints.NotNull;
 public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long itemId;
+    private Long itemId;
 
     @NotNull
     private String itemName;
 
     @NotNull
-    private long itemQuantity;
+    private Long itemQuantity;
 
     @NotNull
-    private double itemPrice;
-
+    private Double itemPrice;
 
     @ManyToOne
     private Category itemCategory;
@@ -30,7 +29,7 @@ public class Item {
 
     private String itemDescription;
 
-    public Item(@NotNull String itemName, @NotNull long itemQuantity, @NotNull double itemPrice, Category itemCategory, Country itemCountry, String itemDescription) {
+    public Item(@NotNull String itemName, @NotNull Long itemQuantity, @NotNull Double itemPrice, Category itemCategory, Country itemCountry, String itemDescription) {
         this.itemName = itemName;
         this.itemQuantity = itemQuantity;
         this.itemPrice = itemPrice;
@@ -39,12 +38,12 @@ public class Item {
         this.itemDescription = itemDescription;
     }
 
-    public long getItemID() {
+    public Long getItemId() {
         return itemId;
     }
 
-    public void setItemID(long itemID) {
-        this.itemId = itemID;
+    public void setItemId(Long itemId) {
+        this.itemId = itemId;
     }
 
     public String getItemName() {
@@ -55,20 +54,36 @@ public class Item {
         this.itemName = itemName;
     }
 
-    public long getItemQuantity() {
+    public Long getItemQuantity() {
         return itemQuantity;
     }
 
-    public void setItemQuantity(long itemQuantity) {
+    public void setItemQuantity(Long itemQuantity) {
         this.itemQuantity = itemQuantity;
     }
 
-    public double getItemPrice() {
+    public Double getItemPrice() {
         return itemPrice;
     }
 
-    public void setItemPrice(double itemPrice) {
+    public void setItemPrice(Double itemPrice) {
         this.itemPrice = itemPrice;
+    }
+
+    public Category getItemCategory() {
+        return itemCategory;
+    }
+
+    public void setItemCategory(Category itemCategory) {
+        this.itemCategory = itemCategory;
+    }
+
+    public Country getItemCountry() {
+        return itemCountry;
+    }
+
+    public void setItemCountry(Country itemCountry) {
+        this.itemCountry = itemCountry;
     }
 
     public String getItemDescription() {

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <link rel="stylesheet" href="/style/panel-style.css">
     <meta charset="UTF-8">
@@ -10,7 +10,8 @@
     Add Goods<br><br><br>
 </h2>
 
-<form method="POST" action="/panel/add-goods/statement" enctype="multipart/form-data">
+<form method="POST" action="#" th:action="@{/panel/add-goods/statement}" th:object="${form}">
+<!-- <form method="POST" action="/panel/add-goods/statement" enctype="multipart/form-data"> -->
 <table>
     <tr>
         <th>
@@ -47,10 +48,20 @@
     </tr>
     <tr>
         <td>
-            <input type="text" name="category" required><br>
+            <select th:field="*{category.categoryId}">
+                <option value="-1">--</option>
+                <option th:each="cat : ${categoryList}"
+                        th:value="${cat.categoryId}"
+                        th:text="${cat.categoryName}">Option</option>
+            </select><br>
         </td>
         <td>
-            <input type="text" name="producer" required><br>
+            <select th:field="*{country.countryId}">
+                <option value="-1">--</option>
+                <option th:each="cou : ${countryList}"
+                        th:value="${cou.countryId}"
+                        th:text="${cou.countryName}">Option</option>
+            </select><br>
         </td>
         <td>
             <input type="text" name="description" minlength="10" maxlength="100"><br>
@@ -60,13 +71,11 @@
 
     <br><br><br>
     <div style="text-align: center;">
-        <a href="/panel">
-            <button>
-                Back
-            </button>
-        </a>
+        <form>
+            <input type="button" value="Back" onclick="history.back()">
+        </form>
         <input type="reset" value="Reset">
-        <input type="submit" value="Add Item">
+        <input type="submit" value="Add">
     </div>
 </form>
 </body>

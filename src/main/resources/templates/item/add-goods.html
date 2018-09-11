@@ -11,11 +11,13 @@
 </h2>
 
 <form method="POST" action="#" th:action="@{/panel/add-goods/statement}" th:object="${form}">
-<!-- <form method="POST" action="/panel/add-goods/statement" enctype="multipart/form-data"> -->
 <table>
     <tr>
         <th>
             Name
+            <span style="color: red; ">
+                *
+            </span>
         </th>
         <th>
             Quantity

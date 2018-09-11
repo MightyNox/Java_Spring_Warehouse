@@ -1,5 +1,6 @@
 package com.main.warehouse.controller;
 
+import com.main.warehouse.Form.DisplayGoodsForm;
 import com.main.warehouse.Form.Form;
 import com.main.warehouse.dao.CategoryDao;
 import com.main.warehouse.dao.CountryDao;
@@ -7,6 +8,8 @@ import com.main.warehouse.dao.ItemDao;
 import com.main.warehouse.entity.Category;
 import com.main.warehouse.entity.Country;
 import com.main.warehouse.entity.Item;
+import org.apache.catalina.LifecycleState;
+import org.dom4j.rule.Mode;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -21,6 +24,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Controller
@@ -43,7 +48,25 @@ public class MainController {
 
     @GetMapping("/show-goods")
     public ModelAndView showGoods() {
-        return new ModelAndView("item/show-goods");
+        ModelAndView modelAndView = new ModelAndView("item/show-goods");
+        List<Item> itemList = itemDao.findAll();
+
+        if (itemList.isEmpty()){
+            modelAndView.addObject("displayGoodsFormList", itemList);
+        }
+        else {
+            List<DisplayGoodsForm> displayGoodsFormList = new ArrayList<>();
+            for (Item item : itemList) {
+                displayGoodsFormList.add(new DisplayGoodsForm(item.getItemName(),
+                                                                item.getItemQuantity(),
+                                                                item.getItemPrice(),
+                                                                item.getItemCategory(),
+                                                                item.getItemCountry(),
+                                                                item.getItemDescription()));
+            }
+            modelAndView.addObject("displayGoodsFormList", displayGoodsFormList);
+        }
+        return modelAndView;
     }
 
     @GetMapping("/add-goods")
@@ -113,7 +136,31 @@ public class MainController {
 
     @GetMapping("/delete-category")
     public ModelAndView deleteCategory(){
-        return new ModelAndView("category/delete-category");
+        ModelAndView modelAndView = new ModelAndView("category/delete-category");
+        modelAndView.addObject("categoryList", categoryDao.findAll());
+        modelAndView.addObject("form", new Form());
+        return modelAndView;
+    }
+
+    @PostMapping("/delete-category/statement")
+    public ModelAndView deleteCategoryStatement(@ModelAttribute("form") Form form){
+        String message = "Category Successfully Deleted!";
+
+        if(form.getCategory().getCategoryId() == -1){
+            message = "None category was selected!";
+        }
+
+        else {
+            try {
+                categoryDao.delete(form.getCategory());
+            } catch (Exception e) {
+                message = "An error occurred during deleting category!";
+            }
+        }
+
+        ModelAndView modelAndView = new ModelAndView("statement");
+        modelAndView.addObject("message",message);
+        return modelAndView;
     }
 
     @GetMapping("/load-countries")

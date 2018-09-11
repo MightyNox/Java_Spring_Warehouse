@@ -11,6 +11,7 @@ public class Category {
     private Long categoryId;
 
     @NotNull
+    @Column(unique = true)
     private String categoryName;
 
     public Category() {

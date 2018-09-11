@@ -11,9 +11,11 @@ public class Country {
     private Long countryId;
 
     @NotNull
+    @Column(unique = true)
     private String countryName;
 
     @NotNull
+    @Column(unique = true)
     private String countryCode;
 
     public Country() {

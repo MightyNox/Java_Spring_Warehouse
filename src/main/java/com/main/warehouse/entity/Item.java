@@ -29,6 +29,9 @@ public class Item {
 
     private String itemDescription;
 
+    public Item() {
+    }
+
     public Item(@NotNull String itemName, @NotNull Long itemQuantity, @NotNull Double itemPrice, Category itemCategory, Country itemCountry, String itemDescription) {
         this.itemName = itemName;
         this.itemQuantity = itemQuantity;

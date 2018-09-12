@@ -39,3 +39,39 @@ th{
     text-align: center;
     border-bottom: 1px solid #dddddd;
 }
+
+button{
+    font-family: 'CFOctobre', Arial, serif;
+    background-color: black;
+    color: white;
+    padding: 5% 10%;
+    font-size: 1vw;
+    border-radius: 10vw;
+    cursor: pointer;
+    border: 3px solid black;
+
+    transition-duration: 0.4s;
+}
+
+button:hover {
+    background-color: white;
+    border-color: black;
+    color: black;
+}
+
+input[type=button], input[type=submit], input[type=reset] {
+    font-family: 'CFOctobre', Arial, serif;
+    background-color: black;
+    color: white;
+    padding: 0.4vw 0.4vw;
+    font-size: 1vw;
+    border-radius: 10vw;
+    cursor: pointer;
+    border: 3px solid black;
+}
+
+input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover {
+    background-color: white;
+    border-color: black;
+    color: black;
+}

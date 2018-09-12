@@ -13,6 +13,7 @@ public class Item {
     private Long itemId;
 
     @NotNull
+    @Column(unique = true)
     private String itemName;
 
     @NotNull

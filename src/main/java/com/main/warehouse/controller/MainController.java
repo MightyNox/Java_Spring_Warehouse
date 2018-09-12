@@ -10,6 +10,8 @@ import com.main.warehouse.entity.Country;
 import com.main.warehouse.entity.Item;
 import org.apache.catalina.LifecycleState;
 import org.dom4j.rule.Mode;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -81,17 +83,21 @@ public class MainController {
     @PostMapping("/add-goods/statement")
     public ModelAndView addGoodsStatement(String name, long quantity, double price, @ModelAttribute("form") Form form, String description) {
         String message = "New item Successfully Added!";
-        try {
-            if (form.getCategory().getCategoryId() == -1)
-                form.setCategory(null);
-            if (form.getCountry().getCountryId() == -1)
-                form.setCountry(null);
 
-            itemDao.save(new Item(name, quantity, price, form.getCategory(), form.getCountry(), description));
+        if(itemDao.findByItemName(name) != null) {
+            message = "This Item Exists!";
         }
-        catch (Exception e)
-        {
-            message = "An error occurred during adding new item!";
+        else{
+            try {
+                if (form.getCategory().getCategoryId() == -1)
+                    form.setCategory(null);
+                if (form.getCountry().getCountryId() == -1)
+                    form.setCountry(null);
+
+                itemDao.save(new Item(name, quantity, price, form.getCategory(), form.getCountry(), description));
+            } catch (Exception e) {
+                message = "An error occurred during adding new item!";
+            }
         }
 
         ModelAndView modelAndView = new ModelAndView("statement");
@@ -101,13 +107,72 @@ public class MainController {
 
     @GetMapping("/edit-goods")
     public ModelAndView editGoods(){
-        return new ModelAndView("item/edit-goods");
+        ModelAndView modelAndView = new ModelAndView("item/edit-goods");
+        modelAndView.addObject("categoryList", categoryDao.findAll());
+        modelAndView.addObject("countryList", countryDao.findAll());
+        modelAndView.addObject("form", new Form());
+        return modelAndView;
     }
+
+    @PostMapping("/edit-goods/statement")
+    public ModelAndView editGoodsStatement(String name, long quantity, double price, @ModelAttribute("form") Form form, String description) {
+        String message = "Item Successfully Edited!";
+        Item item = itemDao.findByItemName(name);
+
+        if(item == null) {
+            message = "Item \""+name+"\" Doesn't Exist!";
+        }
+        else{
+            try {
+                if (form.getCategory().getCategoryId() == -1)
+                    form.setCategory(null);
+                if (form.getCountry().getCountryId() == -1)
+                    form.setCountry(null);
+
+                item.setItemQuantity(quantity);
+                item.setItemPrice(price);
+                item.setItemCategory(form.getCategory());
+                item.setItemCountry(form.getCountry());
+                item.setItemDescription(description);
+                itemDao.save(item);
+
+            } catch (Exception e) {
+                message = "An error occurred during editing an item!";
+            }
+        }
+
+        ModelAndView modelAndView = new ModelAndView("statement");
+        modelAndView.addObject("message",message);
+        return modelAndView;
+    }
+
 
     @GetMapping("/delete-goods")
     public ModelAndView deleteGoods() {
         return new ModelAndView("item/delete-goods");
     }
+
+    @PostMapping("/delete-goods/statement")
+    public ModelAndView deleteGoodsStatement(String name) {
+        String message = "Item Successfully Deleted!";
+
+        Item item = itemDao.findByItemName(name);
+        if(item == null) {
+            message = "Item \""+name+"\" Doesn't Exist!";
+        }
+        else{
+            try {
+                itemDao.delete(item);
+            } catch (Exception e) {
+                message = "An error occurred during deleting an item!";
+            }
+        }
+
+        ModelAndView modelAndView = new ModelAndView("statement");
+        modelAndView.addObject("message",message);
+        return modelAndView;
+    }
+
 
     @GetMapping("/add-category")
     public ModelAndView addCategory(){

@@ -214,10 +214,10 @@ public class MainController {
         if(form.getCategory().getCategoryId() == -1){
             message = "None category was selected!";
         }
-        else {
+         else {
             try {
-                List<Item> item = itemDao.findByItemCategory(form.getCategory());
-                if(item != null)
+                List<Item> itemList = itemDao.findAllByItemCategory(form.getCategory());
+                if(!itemList.isEmpty())
                 {
                     message = "Cannot delete category because items contains it!";
                 }
